@@ -1,0 +1,160 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\Thi_Web\\DOAN\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\views\\listdocument\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:views\\listdocument\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\controllers\\listdocumentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:controllers\\listdocumentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\areas\\admin\\views\\favoritestatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:areas\\admin\\views\\favoritestatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\areas\\admin\\views\\ratingstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:areas\\admin\\views\\ratingstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\areas\\admin\\views\\downloadstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:areas\\admin\\views\\downloadstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\areas\\admin\\views\\commentstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:areas\\admin\\views\\commentstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\areas\\admin\\views\\userstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:areas\\admin\\views\\userstatistics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|g:\\thi_web\\doan\\areas\\admin\\views\\author\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8577A79E-12D1-4427-BA9D-F85E8F240439}|DOAN.csproj|solutionrelative:areas\\admin\\views\\author\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ListDocumentController.cs",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Controllers\\ListDocumentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ListDocumentController.cs",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Controllers\\ListDocumentController.cs",
+              "RelativeToolTip": "Controllers\\ListDocumentController.cs",
+              "ViewState": "AgIAANQBAAAAAAAAAADgv+oBAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-18T00:46:58.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Views\\ListDocument\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Views\\ListDocument\\Detail.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Views\\ListDocument\\Detail.cshtml",
+              "RelativeToolTip": "Views\\ListDocument\\Detail.cshtml",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAmwDUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-18T00:45:24.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\FavoriteStatistics\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\FavoriteStatistics\\Index.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\FavoriteStatistics\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\FavoriteStatistics\\Index.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:23:43.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\DownloadStatistics\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\DownloadStatistics\\Index.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\DownloadStatistics\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\DownloadStatistics\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:21:59.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\CommentStatistics\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\CommentStatistics\\Index.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\CommentStatistics\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\CommentStatistics\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:21:03.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\RatingStatistics\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\RatingStatistics\\Index.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\RatingStatistics\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\RatingStatistics\\Index.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAC8AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:19:26.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\Author\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Author\\Index.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\Author\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Author\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwAcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:05:15.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\UserStatistics\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\UserStatistics\\Index.cshtml",
+              "ToolTip": "G:\\Thi_Web\\DOAN\\Areas\\Admin\\Views\\UserStatistics\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\UserStatistics\\Index.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBJwAkAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:05:05.231Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

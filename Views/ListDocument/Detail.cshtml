@@ -1,0 +1,314 @@
+﻿@model DOAN.ViewModel.DocumentDetailViewModel
+
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Chi tiết tài liệu</h2>
+            <span class="underline center"></span>
+            <p class="lead">Xem chi tiết tài liệu của chúng tôi</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="index-2.html">Trang chủ</a></li>
+                <li>Chi tiết</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Products Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="booksmedia-detail-main">
+                <div class="container">
+                    <div class="row">
+                        <!-- Start: Search Section -->
+                        <section class="search-filters">
+                            <div class="container">
+                                <div class="filter-box">
+                                    <h3>Bản muốn tìm tài liệu dành cho bạn?</h3>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- End: Search Section -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-md-push-3">
+                            <div class="booksmedia-detail-box">
+                                <div class="single-book-box">
+                                    <div class="post-thumbnail">
+                                        <div class="book-list-icon yellow-icon"></div>
+                                        <img alt="Book" src="@Model.Document.Image" />
+                                    </div>
+                                    <div class="post-detail">
+                                        <div class="books-social-sharing">
+                                            <ul>
+                                                <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a href="#" target="_blank"><i class="fa fa-rss"></i></a></li>
+                                                <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="optional-links">
+                                            <ul>
+                                                <li>
+                                                    <a href="@Url.Action("ToggleFavorite", "User", new { documentId = Model.Document.DocumentID })"
+                                                       data-toggle="tooltip"
+                                                       data-placement="top"
+                                                       title="Thêm vào yêu thích">
+                                                        <i class="fa fa-heart text-danger"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Mail">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Search">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <header class="entry-header">
+                                            <h2 class="entry-title">@Model.Document.Title</h2>
+                                            <ul>
+                                                <li><strong>Tác giả:</strong> @Model.Document.Author?.Name</li>
+                                                <li><strong>Ngày đăng tải:</strong> @Model.Document.UploadDate</li>
+                                                <li>
+                                                    @if (Model.AverageStar.HasValue)
+                                                    {
+                                                    <li>
+                                                        <div class="mt-1">
+                                                            <h5 class="text-info">
+                                                                Đánh giá: @Math.Round(Model.AverageStar.Value, 1)/5<i class="fa fa-star-o text-muted star"
+                                                                                                                     style="cursor:pointer;color:yellow; font-size: 18px;"></i>
+                                                            </h5>
+                                                        </div>
+                                                    </li>
+
+                                                    }
+                                                </li>
+                                                <li style="color:red"><strong>Điểm:</strong> @Model.Document.DocumentPoint</li>
+                                                <li><strong>Loại tài liệu:</strong> @Model.DocumentTypeName</li>
+                                                <li><strong>Nhà xuất bản :</strong> @Model.PublisherName</li>
+                                            </ul>
+                                        </header>
+
+                                        <div class="entry-content post-buttons">
+                                            <a href="@Url.Action("PreviewFile", "ListDocument", new { id = Model.Document.DocumentID })"
+                                               class="btn btn-dark-gray">
+                                                Xem trước tài liệu
+                                            </a>
+                                            <a href="@Url.Action("DownloadFile", "ListDocument", new { id = Model.Document.DocumentID, type = "file" })" class="btn btn-dark-gray">Tải file gốc</a>
+                                            <a href="@Url.Action("DownloadFile", "ListDocument", new { id = Model.Document.DocumentID, type = "pdf" })" class="btn btn-dark-gray">Tải PDF</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form asp-action="Summarize" method="post" asp-route-id="@Model.Document.DocumentID">
+                                    <button class="btn btn-warning" type="submit">🤖 Tóm tắt tài liệu bằng AI</button>
+                                </form>
+
+                                <br /> <!-- Thêm dòng trống -->
+                                @if (ViewBag.Summary != null)
+                                {
+                                    <div class="mt-3 p-3 bg-light border rounded">
+                                        <h5>🔍 Tóm tắt từ AI:</h5>
+                                        <p>@ViewBag.Summary</p>
+                                    </div>
+                                }
+
+                                <p><strong>Mô tả:</strong> @Model.Document.Description </p>
+                                <br /> <!-- Thêm dòng trống -->
+                                <h3>🤖 Hỏi tài liệu bằng AI</h3>
+                                <br /> <!-- Thêm dòng trống -->
+                                <div class="chatbox bg-light p-3 border rounded">
+                                    <form id="chatForm">
+                                        <div class="mb-2">
+                                            <textarea id="question" name="question" class="form-control" rows="2" placeholder="Nhập câu hỏi về tài liệu..."></textarea>
+                                        </div>
+                                        <br /> <!-- Thêm dòng trống -->
+                                        <input type="hidden" id="documentId" name="id" value="@Model.Document.DocumentID" />
+                                        <button type="submit" class="btn btn-primary">Gửi câu hỏi</button>
+                                    </form>
+                                    <br /> <!-- Thêm dòng trống -->
+                                    <div id="responseArea" class="mt-3 border p-3 bg-white" style="min-height: 100px;">
+                                        <i>Phản hồi sẽ hiển thị ở đây...</i>
+                                    </div>
+                                </div>
+                                <br /> <!-- Thêm dòng trống -->
+                                @* <ul class="detail-page-listing">
+                                    <li><strong>Length:</strong> 518 pages.</li>
+                                    <li><strong>Format:</strong> DVD</li>
+                                    <li><strong>Language Note:</strong> Icelandic dialogue; English subtitles.</li>
+                                    <li><strong>Genre :</strong> Feature films, Fiction films, Drama</li>
+                                    <li><strong>Topics:</strong> Friendship, Bullies, Pranks, School</li>
+                                    <li><strong>Time Period:</strong> 2000s -- 21st century</li>
+                                </ul> *@
+                                <div class="table-tabs" id="responsiveTabs">
+                                    <ul class="nav nav-tabs">
+
+                                        <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionB">Các đánh giá</a></li>
+                                        <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionC">Gủi đánh giá</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        @foreach (var comment in Model.Comments
+                                        .Where(c => c.DocumentID == Model.Document.DocumentID)
+                                        .OrderByDescending(c => c.CreatedAt)
+                                        .Take(4))
+                                        {
+                                            <div class="border p-2 mb-2">
+                                                <strong>@comment.FullName</strong>
+                                                <small>(@comment.CreatedAt?.ToString("dd/MM/yyyy HH:mm"))</small>
+                                                <p>@comment.Content</p>
+                                            </div>
+                                        }
+
+                                        <div id="sectionC" class="tab-pane fade in">
+                                            <h5>Gửi bình luận mới</h5>
+                                            <form id="commentForm">
+                                                <input type="hidden" id="documentId" value="@Model.Document.DocumentID" />
+                                                <div class="form-group">
+                                                    <textarea id="commentContent" class="form-control" placeholder="Nhập bình luận..." required></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-success mt-2">Gửi bình luận</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                @* popular item *@
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-md-pull-9">
+                            <aside id="secondary" class="sidebar widget-area" data-accordion-group>
+
+                                @await Component.InvokeAsync("RecentCategory")
+                                <div class="widget widget_recent_entries">
+                                    <h4 class="widget-title">On-Order Items</h4>
+                                    <ul>
+                                        <li>
+                                            <figure>
+                                                <img src="images/order-item-01.jpg" alt="product" />
+                                            </figure>
+                                            <a href="#">The Sonic Boom</a>
+                                            <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
+                                            <span><strong>ISBN:</strong> 978158157</span>
+                                            <div class="rating">
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <img src="images/order-item-02.jpg" alt="product" />
+                                            </figure>
+                                            <a href="#">The Sonic Boom</a>
+                                            <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
+                                            <span><strong>ISBN:</strong> 978158157</span>
+                                            <div class="rating">
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <img src="images/order-item-03.jpg" alt="product" />
+                                            </figure>
+                                            <a href="#">The Sonic Boom</a>
+                                            <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
+                                            <span><strong>ISBN:</strong> 978158157</span>
+                                            <div class="rating">
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                                <span>☆</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- End: Products Section -->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#commentForm").submit(function (e) {
+                e.preventDefault();
+
+                const content = $("#commentContent").val();
+                const documentId = $("#documentId").val();
+
+                if (content.trim() === "") {
+                    alert("Vui lòng nhập nội dung bình luận.");
+                    return;
+                }
+
+                $.ajax({
+                    url: '@Url.Action("PostComment", "ListDocument")',
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        Content: content,
+                        DocumentID: documentId
+                    }),
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Bình luận đã được gửi thành công.");
+                            location.reload(); // 👉 Load lại trang để hiển thị bình luận mới từ DB
+                        } else {
+                            alert(response.message || "Lỗi gửi bình luận.");
+                        }
+                    },
+                    error: function () {
+                        alert("Bạn chưa đăng nhập.");
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $('#chatForm').submit(function (e) {
+            e.preventDefault();
+
+            var question = $('#question').val();
+            var id = $('#documentId').val();
+
+            if (!question.trim()) return;
+
+            $('#responseArea').html("<i>Đang xử lý...</i>");
+
+            $.ajax({
+                url: '/ListDocument/AskAI',
+                type: 'POST',
+                data: { id: id, question: question },
+                success: function (data) {
+                    $('#responseArea').html("<b>AI:</b> " + data);
+                },
+                error: function () {
+                    $('#responseArea').html("<span class='text-danger'>Có lỗi xảy ra khi gửi câu hỏi.</span>");
+                }
+            });
+        });
+    </script>
+}

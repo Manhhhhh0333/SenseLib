@@ -1,0 +1,86 @@
+﻿@using DOAN.Utilities
+@model DOAN.Models.tblUsers
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Sửa Tài khoản</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form asp-action="Edit" method="post" class="form-valide" novalidate="novalidate">
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                        <input asp-for="UserID" type="hidden" />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="Username">Tên Tài Khoản</label>
+                                <input asp-for="Username" class="form-control" placeholder="Nhập tên tài khoản" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="PasswordHash">Mật Khẩu</label>
+                                <input asp-for="PasswordHash" class="form-control" placeholder="Nhập mật khẩu" />
+                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control" placeholder="Nhập email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="FullName">Tên đầy đủ</label>
+                                <input asp-for="FullName" class="form-control" placeholder="Nhập họ tên" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="Role">Phân Quyền</label>
+                                <select asp-for="Role" class="form-select" id="Role">
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 d-flex align-items-center">
+                                <label class="mb-0 mr-2">Hiển thị</label>
+                                @Html.CheckBox("Status", Model.Status, new { @class = "mr-2" })
+                                <span>Cho phép hiển thị</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-file-plus-fill"></i> Lưu
+                                </button>
+                                <a asp-controller="User" asp-action="Index" class="btn btn-warning ml-2">Quay lại</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,60 @@
+﻿@model List<DOAN.ViewModel.PointTransactionViewModel>
+
+
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Nạp tiền vào tài khoản</h2>
+            <span class="underline center"></span>
+            <p class="lead">Đánh giá và gửi phản hồi ở trang này cho chúng tôi</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li>Liên hệ</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<h2>Lịch sử điểm của bạn</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Thời gian</th>
+            <th>Điểm</th>
+            <th>Loại giao dịch</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.Points</td>
+                <td>
+                    @switch (item.ActionType)
+                    {
+                        case "Recharge":
+                            <span class="badge bg-primary">Nạp điểm</span>
+                            break;
+                        case "Download":
+                            <span class="badge bg-danger">Tiêu điểm</span>
+                            break;
+                        case "Earn":
+                            <span class="badge bg-success">Được thưởng</span>
+                            break;
+                        case "Approve":
+                            <span class="badge bg-info">Được duyệt</span>
+                            break;
+                        default:
+                            <span class="badge bg-secondary">@item.ActionType</span>
+                            break;
+                    }
+                </td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>

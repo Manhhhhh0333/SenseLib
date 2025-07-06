@@ -1,0 +1,111 @@
+﻿@model DOAN.ViewModel.LoginVM
+
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Đăng nhập</h2>
+            <span class="underline center"></span>
+            <p class="lead">Vui lòng đăng nhập để tiếp tục sử dụng dịch vụ của chúng tôi.</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="index-2.html">Trang chủ</a></li>
+                <li>Đăng nhập</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Cart Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="signin-main">
+                <div class="container">
+                    <div class="woocommerce">
+                        <div class="woocommerce-login">
+                            <div class="company-info signin-register">
+                                <!-- Thay đổi ở đây: Sử dụng col-md-6 và offset 3 để căn giữa -->
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="company-detail bg-dark">
+                                        <div class="signin-head">
+                                            <h2>Đăng nhập</h2>
+                                            <span class="underline left"></span>
+                                        </div>
+
+                                        <form class="login" asp-action="Login" method="post">
+                                            <div class="text-danger" asp-validation-summary="All"></div>
+
+                                            <p class="form-row form-row-first input-required">
+                                                <label>
+                                                    <span class="first-letter">Tên đăng nhập</span>
+                                                    <span class="second-letter">*</span>
+                                                </label>
+                                                <input asp-for="UserName" class="input-text" />
+                                                <span class="text-danger" asp-validation-for="UserName"></span>
+                                            </p>
+
+                                            <p class="form-row form-row-last input-required">
+                                                <label>
+                                                    <span class="first-letter">Mật khẩu</span>
+                                                    <span class="second-letter">*</span>
+                                                </label>
+                                                <input asp-for="Passwords" class="input-text" />
+                                                <span class="text-danger" asp-validation-for="Passwords"></span>
+                                            </p>
+
+                                            <div class="clear"></div>
+
+                                            <div class="password-form-row">
+                                                <p class="form-row input-checkbox">
+                                                    <input type="checkbox" name="rememberme" />
+                                                    <label class="inline" for="rememberme">Ghi nhớ đăng nhập</label>
+                                                </p>
+                                                <p class="lost_password">
+                                                    <a href="@Url.Action("ForgotPassword","User")">Quên mật khẩu?</a>
+                                                </p>
+                                            </div>
+
+                                            <div class="form-actions">
+                                                <input type="submit" value="Đăng nhập" class="button btn btn-default" />
+                                                <a href="@Url.Action("Register","User")" class="button btn btn-primary" style="margin-left: 10px;">Đăng ký</a>
+                                            </div>
+
+                                            <div class="clear"></div>
+                                        </form>
+
+                                        @section Scripts {
+                                            @await Html.PartialAsync("_ValidationScriptsPartial")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<style>
+    /* Thêm CSS để đảm bảo căn giữa hoàn toàn */
+    .signin-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    .company-detail {
+        padding: 30px;
+        border-radius: 5px;
+    }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+<!-- End: Cart Section -->

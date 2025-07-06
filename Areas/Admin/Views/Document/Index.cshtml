@@ -1,0 +1,109 @@
+﻿@using DOAN.Models;
+@model IList<tblDocuments>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="pagetitle">
+            <h2>Danh Sách Tài Liệu</h2>
+        </div>
+
+        <p>
+            <a type="button" class="btn btn-success" asp-area="Admin" asp-controller="Document" asp-action="Create">
+                <i class="bi bi-file-earmark-text me-1"></i>Thêm Tài Liệu
+                </a>
+        </p>
+        <div class="col-lg-12">
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px;">
+                                        <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="checkAll">
+                                            <label class="custom-control-label" for="checkAll"></label>
+                                        </div>
+                                    </th>
+                                    <th>STT</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Trạng thái</th>
+                                    
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var count = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text center">
+                                            <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                                <input type="checkbox" class="custom-control-input" id="customCheckBox_@item.DocumentID">
+                                                <label class="custom-control-label" for="customCheckBox_@item.DocumentID"></label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text center"><strong>@count</strong></td>
+                                      
+                                        <td>@item.Title</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(item.Image))
+                                            {
+                                                <img src="@Url.Content(item.Image)" alt="Document Image" style="max-width:100px; max-height:60px;" />
+                                            }
+                                            else
+                                            {
+                                                <span>Không có hình</span>
+                                            }
+                                        </td>
+                                      
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                @if (@item.Status == "Phê duyệt")
+                                                {
+                                                    <i class="fa fa-circle text-success mr-1">Đã duyệt</i>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-circle text-danger mr-1">Chờ duyệt</i>
+
+                                                }
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="d-flex">
+                                                <a asp-area="Admin" asp-controller="Document" asp-action="Edit"
+                                                   asp-route-id="@item.DocumentID"
+                                                   class="btn btn-primary shadow btn-xs sharp mr-1">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a asp-area="Admin" asp-controller="Document" asp-action="Delete"
+                                                   asp-route-id="@item.DocumentID"
+                                                   class="btn btn-danger shadow btn-xs sharp">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    count++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

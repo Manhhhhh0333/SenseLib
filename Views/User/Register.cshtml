@@ -1,0 +1,132 @@
+﻿@model DOAN.ViewModel.RegisterVM
+
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Đăng ký</h2>
+            <span class="underline center"></span>
+            <p class="lead">Vui lòng đăng ký để tiếp tục sử dụng dịch vụ của chúng tôi.</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="index-2.html">Trang chủ</a></li>
+                <li>Đăng ký</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Cart Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="signin-main">
+                <div class="container">
+                    <div class="woocommerce">
+                        <div class="woocommerce-login">
+                            <div class="company-info signin-register">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="company-detail bg-light">
+                                        <div class="new-user-head">
+                                            <h2>Đăng ký tài khoản</h2>
+                                            <span class="underline left"></span>
+                                            <p>Nếu bạn chưa có tài khoản, vui lòng đăng ký ở đây.</p>
+                                        </div>
+                                        <form asp-action="Register" method="post">
+                                            <div class="form-group">
+                                                <label asp-for="FullName"></label>
+                                                <input asp-for="FullName" class="form-control" />
+                                                <span asp-validation-for="FullName" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="UserName"></label>
+                                                <input asp-for="UserName" class="form-control" />
+                                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Passwords"></label>
+                                                <input asp-for="Passwords" class="form-control" type="password" />
+                                                <span asp-validation-for="Passwords" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="ConfirmPassword"></label>
+                                                <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Email"></label>
+                                                <input asp-for="Email" class="form-control" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-actions text-center">
+                                                <button type="submit" class="btn btn-primary">Đăng ký</button>
+                                            </div>
+                                        </form>
+
+                                        @section Scripts {
+                                            <partial name="_ValidationScriptsPartial" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- End: Cart Section -->
+
+<style>
+    /* CSS đã được điều chỉnh */
+    .signin-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    .company-detail {
+        padding: 30px;
+        border-radius: 5px;
+        margin: 20px 0;
+        background: #fff; /* Nền trắng cho khung form */
+        box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Thêm bóng đổ nhẹ */
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff; /* Nền trắng cho input */
+        color: #333; /* Màu chữ đậm */
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        background-color: #337ab7;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #286090;
+        }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+</style>

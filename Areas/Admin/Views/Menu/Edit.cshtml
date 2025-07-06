@@ -1,0 +1,85 @@
+﻿@model DOAN.Models.tblMenu
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+	<div class="container-fluid">
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Sửa liên kết</h4>
+			</div>
+			<div class="card-body">
+				<div class="form-validation">
+					<form asp-action="Edit" method="post" class="form-valide" novalidate="novalidate">
+						<div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+						<input asp-for="MenuID" type="hidden" />
+
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label asp-for="MenuName">Tên liên kết <span class="text-danger">*</span></label>
+								<input asp-for="MenuName" class="form-control" placeholder="Nhập tên liên kết" />
+								<span asp-validation-for="MenuName" class="text-danger"></span>
+							</div>
+
+							<div class="col-md-6">
+								<label asp-for="Levels">Cấp</label>
+								<select asp-for="Levels" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label asp-for="ParentID">Tên liên kết cha</label>
+								<select asp-for="ParentID" asp-items="@(new SelectList(ViewBag.mnList, "Value", "Text"))" class="form-control"></select>
+							</div>
+
+							<div class="col-md-6">
+								<label asp-for="Link">Link</label>
+								<input asp-for="Link" class="form-control" placeholder="Nhập link" />
+								<span asp-validation-for="Link" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-6">
+								<label asp-for="MenuOrder">Thứ tự</label>
+								<input asp-for="MenuOrder" class="form-control" placeholder="Nhập thứ tự menu" />
+								<span asp-validation-for="MenuOrder" class="text-danger"></span>
+							</div>
+
+							<div class="col-md-6">
+								<label asp-for="Position">Vị trí</label>
+								<input asp-for="Position" class="form-control" placeholder="Nhập vị trí menu" />
+								<span asp-validation-for="Position" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-6 d-flex align-items-center">
+								<label class="mb-0 mr-2">Hiển thị</label>
+								@Html.CheckBox("IsActive", Model.IsActive, new { @class = "mr-2" })
+								<span>Cho phép hiển thị</span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-12 text-right">
+								<button type="submit" class="btn btn-primary">
+									<i class="bi bi-file-plus-fill"></i> Lưu
+								</button>
+								<a asp-controller="Menu" asp-action="Index" class="btn btn-warning ml-2">Quay lại</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

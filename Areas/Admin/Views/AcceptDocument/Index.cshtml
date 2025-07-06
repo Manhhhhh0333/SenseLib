@@ -1,0 +1,128 @@
+﻿@using DOAN.Models;
+@model IList<tblDocuments>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="pagetitle">
+            <h2>Duyệt Tài Liệu</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>STT</th>
+                                    <th>Người đăng</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var count = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                        <td><strong>@count</strong></td>
+                                        <td>@item.UploadedUser?.Username</td>
+                                        <td>@item.Title</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(item.Image))
+                                            {
+                                                <img src="@Url.Content(item.Image)" alt="Document Image" style="max-width:100px; max-height:60px;" />
+                                            }
+                                            else
+                                            {
+                                                <span>Không có hình</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if ((item.Status ?? "").ToLower().Trim() == "phê duyệt")
+                                            {
+                                                <span class="badge bg-success">Đã duyệt</span>
+                                            }
+                                            else if ((item.Status ?? "").ToLower().Trim() == "từ chối")
+                                            {
+                                                <span class="badge bg-danger">Từ chối</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning text-dark">Chờ duyệt</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if ((item.Status ?? "").ToLower().Trim() == "chờ phê duyệt")
+                                            {
+                                                <form asp-action="Approve" asp-route-id="@item.DocumentID" method="post" style="display:inline">
+                                                    <button type="submit" class="btn btn-success btn-sm">Duyệt</button>
+                                                </form>
+
+                                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rejectModal" data-doc-id="@item.DocumentID">
+                                                    Từ chối
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-secondary btn-sm" disabled>Đã xử lý</button>
+                                            }
+                                        </td>
+                                    </tr>
+                                    count++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Từ Chối -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="rejectForm" asp-action="Reject" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel">Từ chối tài liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="rejectDocId" />
+                    <div class="form-group">
+                        <label for="reason">Lý do từ chối:</label>
+                        <textarea class="form-control" name="reason" id="reason" rows="4" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Gửi lý do từ chối</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Gắn document ID vào modal khi bấm nút từ chối
+        var rejectModal = document.getElementById('rejectModal');
+        rejectModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var docId = button.getAttribute('data-doc-id');
+            document.getElementById('rejectDocId').value = docId;
+        });
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿@model DOAN.ViewModel.UploadDocumentVM
+
+
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Đăng ký</h2>
+            <span class="underline center"></span>
+            <p class="lead">Vui lòng đăng ký để tiếp tục sử dụng dịch vụ của chúng tôi.</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="index-2.html">Trang chủ</a></li>
+                <li>Đăng ký</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="upload-section section-padding">
+    <div class="container">
+        <div class="center-content">
+            <h2 class="section-title">Đăng tải tài liệu</h2>
+            <span class="underline center"></span>
+            <p class="lead">Chia sẻ tài liệu với cộng đồng.</p>
+        </div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+
+        <form asp-action="Upload" method="post" enctype="multipart/form-data" class="upload-form">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>Tiêu đề</label>
+                <input asp-for="Title" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Mô tả</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Đường dẫn ảnh</label>
+                <input asp-for="Image" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Tác giả</label>
+                <select asp-for="AuthorID" asp-items="Model.Authors" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+                <label>Thể loại</label>
+                <select asp-for="CategoryID" asp-items="Model.Categories" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+                <label>Nhà xuất bản</label>
+                <select asp-for="PublisherID" asp-items="Model.Publishers" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+                <label>Số điểm mong muốn của bạn</label>
+                <input asp-for="DocumentPoint" type="number" class="form-control" required min="0" max="10" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Chọn tài liệu</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-success" type="button" onclick="openDialog()">Chọn tệp</button>
+                    </div>
+                    <input type="text" class="form-control" asp-for="FilePath" id="file_input" aria-describedby="button-addon2">
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Tải lên</button>
+            </div>
+        </form>
+    </div>
+</section>
+@section Scripts {
+    @{
+        var summerNote = new DOAN.Models.SummerNote("#");
+        <partial name="_SummerNote" model="summerNote" />
+    }
+
+}

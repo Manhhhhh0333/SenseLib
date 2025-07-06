@@ -1,0 +1,90 @@
+﻿@model List<DOAN.ViewModel.FavoriteDocumentViewModel>
+@using DOAN.Models;
+@using DOAN.Utilities;
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Tài Liệu Yêu Thích</h2>
+            <span class="underline center"></span>
+            <p class="lead">Lưu trữ các tài liệu mà bạn yêu thích để dễ dàng truy cập lại.</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li>Tài liệu yêu thích</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Favorite Documents Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="favorite-documents-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="page type-page status-publish hentry">
+                                <div class="entry-content">
+                                    <div class="woocommerce table-tabs">
+                                        <table class="table table-bordered shop_table cart">
+                                            @if (TempData["FavoriteMessage"] != null)
+                                            {
+                                                <div class="alert alert-info">
+                                                    @TempData["FavoriteMessage"]
+                                                </div>
+                                            }
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-thumbnail">Hình ảnh</th>
+                                                    <th class="product-name">Tên tài liệu</th>
+                                                    <th class="product-author">Tác giả</th>
+                                                    <th class="product-actions">Hành động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null && Model.Any())
+                                                {
+                                                    foreach (var doc in Model)
+                                                    {
+                                                        string url = Functions.TitleSlugGeneration("document", doc.Title ?? "no-title", doc.DocumentID);
+                                                        <tr class="cart_item">
+                                                            <td class="product-thumbnail">
+                                                                <a href="/@url">
+                                                                    <img src="@doc.ImagePath" alt="@doc.Title" style="max-width: 80px;" />
+                                                                </a>
+                                                            </td>
+                                                            <td class="product-name">
+                                                                <a href="/@url">
+                                                                    <strong>@doc.Title</strong>
+                                                                </a>
+                                                            </td>
+                                                            <td class="product-author">@doc.Author</td>
+                                                            <td class="product-actions">
+                                                                <a href="/@url" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                                                                <a href="@Url.Action("ToggleFavorite", "User", new { documentId = doc.DocumentID })" class="btn btn-danger btn-sm">Xóa</a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="4" class="text-center">Không có tài liệu yêu thích nào.</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div><!-- .entry-content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- End: Favorite Documents Section -->

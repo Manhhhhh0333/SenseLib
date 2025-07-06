@@ -1,0 +1,42 @@
+﻿@model DOAN.Models.tblUsers
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Xóa tài khoản</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Delete" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="UserID" class="control-label">Mã Tài Khoản</label>
+                            <input asp-for="UserID" class="form-control mb-3" disabled />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="FullName" class="control-label">Tên Hiển Thị</label>
+                            <input asp-for="FullName" class="form-control mb-3" disabled />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Email" class="control-label">Tên email</label>
+                            <input asp-for="Email" class="form-control mb-3" disabled />
+                        </div>
+
+                    </div>
+                    <input type="hidden" asp-for="UserID" />
+                    <div class="form-group mt-3">
+                        <a class="btn btn-lg btn-warning p-2 mr-3" href="javascript:history.back()">
+                            <i class="bi bi-arrow-left-circle"></i> Quay Lại
+                        </a>
+                        <button type="submit" class="btn btn-lg btn-danger p-2">
+                            <i class="bi bi-trash-fill"></i> Xóa tài khoản
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

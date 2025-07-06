@@ -1,0 +1,29 @@
+﻿@using DOAN.Areas.Admin.Models
+@model IList<AdminMenu>
+<!-- ======= Sidebar ======= -->
+ 
+
+<ul class="metismenu" id="menu">
+    <li class="nav-label first">Chức năng</li>
+    @foreach (var item in Model.Where(m => m.ItemLevel == 1).OrderBy(n => n.ItemOrder))
+    {
+        var Pid = item.AdminMenuID;
+        var Smenu = Model.Where(p => p.ParentLevel == Pid).OrderBy(p => p.ItemOrder).ToList();
+        <li>
+            <a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                <i class="@item.Icon"></i>
+                <span class="nav-text">@item.ItemName</span>
+            </a>
+            <ul aria-expanded="false">
+                @foreach (var smn in Smenu)
+                {
+                    <li>
+                        <a href="/Admin/@smn.ControllerName/@smn.ActionName">
+                            @smn.ItemName
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

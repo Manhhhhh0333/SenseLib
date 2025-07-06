@@ -1,0 +1,71 @@
+﻿@model DOAN.Models.tblSliders
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Sửa Thanh Trượt</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form asp-action="Edit" method="post" class="form-valide" novalidate="novalidate">
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        <input asp-for="SliderID" type="hidden" />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="Caption">Tên tiêu đề</label>
+                                <input asp-for="Caption" class="form-control" placeholder="Nhập tên tiêu đề" />
+                                <span asp-validation-for="Caption" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Link">Đường dẫn</label>
+                                <input asp-for="Link" class="form-control" placeholder="Nhập đường dẫn" />
+                                <span asp-validation-for="Link" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label">Hình ảnh</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-success" type="button" onclick="openDialog()">Choose a pic</button>
+                                </div>
+                                <input type="text" class="form-control" asp-for="ImagePath" id="file_input" aria-describedby="button-addon2">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 d-flex align-items-center">
+                                <label class="mb-0 mr-2">Hiển thị</label>
+                                @Html.CheckBox("Status", Model.Status, new { @class = "mr-2" })
+                                <span>Cho phép hiển thị</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-file-plus-fill"></i> Lưu
+                                </button>
+                                <a asp-controller="Slider" asp-action="Index" class="btn btn-warning ml-2">Quay lại</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section HeadContent {
+    @{
+        var summerNote = new DOAN.Areas.Admin.Models.SummerNote("#NM");
+        <partial name="_SummerNote" model="summerNote" />
+    }
+
+}

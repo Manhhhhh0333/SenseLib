@@ -1,0 +1,125 @@
+﻿@model List<DOAN.Models.tblUsers>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <h2 class="my-4 text-primary ">Thống kê tài khoản người dùng</h2>
+
+        <table class="table table-bordered table-striped text-center align-middle">
+            <tr>
+                <th class="text-center">Thống kê</th>
+                <th class="text-center">Số lượng</th>
+            </tr>
+            <tr>
+                <td><strong>Tổng số tài khoản</strong></td>
+                <td>@ViewBag.TotalUsers</td>
+            </tr>
+            <tr>
+                <td><strong>Đã kích hoạt</strong></td>
+                <td>@ViewBag.ActiveUsers</td>
+            </tr>
+            <tr>
+                <td><strong>Chưa kích hoạt</strong></td>
+                <td>@ViewBag.InactiveUsers</td>
+            </tr>
+            <tr>
+                <td><strong>Đăng nhập trong tháng</strong></td>
+                <td>@ViewBag.LoggedInThisMonth</td>
+            </tr>
+        </table>
+        <br />
+
+        <h4>Tài khoản theo vai trò</h4>
+        <table class="table table-bordered table-striped text-center align-middle">
+            <tr><th class="text-center">Vai trò</th><th class="text-center">Số lượng</th></tr>
+            @foreach (var item in ViewBag.UsersByRole)
+            {
+                <tr><td>@item.Role</td><td>@item.Count</td></tr>
+            }
+        </table>
+
+        <h4>Đăng ký theo tháng</h4>
+        <table class="table table-bordered table-striped text-center align-middle">
+            <tr><th class="text-center">Tháng/Năm</th><th class="text-center">Số lượng</th></tr>
+            @foreach (var item in ViewBag.UsersByMonth)
+            {
+                <tr><td>@item.Month/@item.Year</td><td>@item.Count</td></tr>
+            }
+        </table>
+
+        <h4 >Danh sách tài khoản</h4>
+        <table class="table table-bordered table-striped text-center align-middle">
+            <tr>
+                <th class="text-center">Email</th>
+                <th class="text-center">Trạng thái</th>
+                <th class="text-center">Vai trò</th>
+                <th class="text-center">Ngày tạo</th>
+                <th class="text-center">Lần đăng nhập gần nhất</th>
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@(user.Status ? "Hoạt động" : "Chưa kích hoạt")</td>
+                    <td>@user.Role</td>
+                    <td>@user.CreatedAt?.ToString("dd/MM/yyyy")</td>
+                    <td>@(user.LastLogin?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa đăng nhập")</td>
+                </tr>
+            }
+        </table>
+        <div class="mb-3">
+            <a class="btn btn-success" href="@Url.Action("ExportExcel", "UserStatistics", new { area = "Admin" })">
+                Xuất Excel
+            </a>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <canvas id="usersByMonthChart" width="400" height="200" class="mt-4"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('usersByMonthChart').getContext('2d');
+
+            const usersByMonth = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.UsersByMonth));
+
+            const labels = usersByMonth.map(x => `${x.Month}/${x.Year}`);
+            const data = usersByMonth.map(x => x.Count);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Người dùng đăng ký',
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Số lượng'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tháng/Năm'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+</div>
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

@@ -1,0 +1,16 @@
+﻿@model IList<tblCategories>
+@using DOAN.Models;
+
+
+<div class="widget widget_recent_releases">
+    <h4 class="widget-title">Danh mục sách</h4>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><a asp-controller="ListDocument" asp-action="Index" asp-route-category="@item.CategoryID">@item.Name</a></li>
+        }
+       
+    </ul>
+    <div class="clearfix"></div>
+</div>
+

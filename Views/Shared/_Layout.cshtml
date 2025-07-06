@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+
+
+<head>
+
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+
+    <!-- Title -->
+    <title>..:: LIBRARIA ::..</title>
+    <!-- Favicon -->
+    <link href="~/images/favicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+    <link href="~/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Mobile Menu -->
+    <link href="~/assets/css/mmenu.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/mmenu.positioning.css" rel="stylesheet" type="text/css" />
+
+    <!-- Stylesheet -->
+    <link href="~/assets/style.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<style>
+    .topbar-links {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .divider {
+        color: #ccc;
+        margin: 0 5px;
+    }
+
+    .user-dropdown .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-favorites a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .count {
+        background: #f44336;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dropdown-menu {
+        background: black;
+        padding: 10px;
+        min-width: 250px;
+    }
+
+    .favorites-dropdown .favorites-items {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .empty-favorites {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+    }
+
+    .favorites-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .favorites-dropdown li {
+        display: flex;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        align-items: center;
+    }
+
+    .item-image {
+        width: 40px;
+        margin-right: 10px;
+    }
+
+        .item-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .item-info {
+        flex: 1;
+    }
+
+    .remove {
+        color: #f44336;
+        margin-left: 10px;
+    }
+</style>
+
+<body>
+
+    <!-- Start: Header Section -->
+    <header id="header-v1" class="navbar-wrapper">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="navbar-header">
+                                <div class="navbar-brand">
+                                    <h1>
+                                        <a asp-controller="Home" asp-action="Index">
+                                            <img src="~/assets/images/libraria-logo-v1.png" alt="LIBRARIA" />
+                                        </a>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <!-- Header Topbar -->
+                            <div class="header-topbar hidden-sm hidden-xs">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="topbar-info">
+                                            <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>+84-123456789</a>
+                                            <span>/</span>
+                                            <a href="mailto:support@libraria.com"><i class="fa fa-envelope"></i>Nhom8website@libraria.com</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="topbar-links">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <div class="dropdown user-dropdown">
+                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                        <i class="fa fa-user"></i> @Context.User.Identity.Name
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" asp-action="Profile" asp-controller="User">
+                                                            <i class="fa fa-user"></i> Hồ sơ cá nhân
+                                                        </a>
+                                                        <a class="dropdown-item" href="@Url.Action("FavoriteDocuments","User")">
+                                                            <i class="fa fa-heart"></i> Tài liệu yêu thích
+                                                        </a>
+                                                        <a class="dropdown-item" href="@Url.Action("DownloadHistories","User")">
+                                                            <i class="fa fa-history"></i> Lịch sử đăng tải
+                                                        </a>
+                                                        <a class="dropdown-item" href="@Url.Action("PointHistory","Checkout")">
+                                                            <i class="fa fa-history"></i> Lịch sử giao dịch
+                                                        </a>
+                                                        <a class="dropdown-item" href="@Url.Action("Upload","User")">
+                                                            <i class="fa fa-history"></i> Tải file lên
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" asp-action="Logout" asp-controller="User">
+                                                            <i class="fa fa-sign-out"></i> Đăng xuất
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Login","User")"><i class="fa fa-lock"></i> Đăng nhập / Đăng ký</a>
+                                            }
+
+                                            <span class="divider">|</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            @await Component.InvokeAsync("MenuView")
+
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- End: Header Section -->
+    @RenderBody();
+    <!-- Start: Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div id="footer-widgets">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 widget-container">
+                        <div id="text-2" class="widget widget_text">
+                            <h3 class="footer-widget-title" style="font-family: 'Times New Roman', Times, serif;">Về chúng tôi</h3>
+                            <span class="underline left"></span>
+                            <div class="textwidget">
+                                Thư viện số của chúng tôi chứa các tài liệu và sách thú vị và bổ ích cho tất cả mọi người.
+                            </div>
+                            <address>
+                                <div class="info">
+                                    <i class="fa fa-location-arrow"></i>
+                                    <span>182 Lê Duẩn, Bến Thủy, Vinh, Nghệ An</span>
+                                </div>
+                                <div class="info">
+                                    <i class="fa fa-envelope"></i>
+                                    <span><a href="#">Nhom8website@libraria.com</a></span>
+                                </div>
+                                <div class="info">
+                                    <i class="fa fa-phone"></i>
+                                    <span><a href="+84-123456789">+84-123456789</a></span>
+                                </div>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 widget-container">
+                        <div id="nav_menu-2" class="widget widget_nav_menu">
+                            <h3 class="footer-widget-title" style="font-family: 'Times New Roman', Times, serif;">Liên Kết</h3>
+                            <span class="underline left"></span>
+                            <div class="menu-quick-links-container">
+                                <ul id="menu-quick-links" class="menu">
+                                    <li><a href="Home/Index">Danh Sách Tài Liệu</a></li>
+                                    <li><a href="ListDocument/Index">Giới Thiệu</a></li>
+                                    <li><a href="Contact/Index">Liên Hệ</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix hidden-lg hidden-md hidden-xs tablet-margin-bottom"></div>
+                    <div class="col-md-2 col-sm-8 widget-container">
+                        <div id="text-4" class="widget widget_text">
+                            <h3 class="footer-widget-title" style="font-family: 'Times New Roman', Times, serif;">Thông tin hữu ích</h3>
+                            <span class="underline left"></span>
+                            <div class="menu-quick-links-container">
+                                <ul id="menu-quick-links" class="menu">
+                                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                                    <li><a href="#">Thỏa thuận dịch vụ</a></li>
+                                    <li><a href="#">Quyền lợi</a></li>
+                                    <li><a href="#">Quy định riêng tự</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 widget-container">
+                        <div class="widget twitter-widget">
+                            <h3 class="footer-widget-title" style="font-family: 'Times New Roman', Times, serif;">Tin Tức</h3>
+                            <span class="underline left"></span>
+                            <div class="menu-quick-links-container">
+                                <ul>
+                                    <li>
+                                        <p><a href="#"></a> Tin dịch vụ</a></p>
+                                    </li>
+                                    <li>
+                                        <p><a href="#"></a> Đánh giá sách</a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End: Footer -->
+    <!-- jQuery Latest Version 1.x -->
+    <script type="text/javascript" src="~/assets/js/jquery-1.12.4.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="~/assets/js/jquery-ui.min.js"></script>
+
+    <!-- jQuery Easing -->
+    <script type="text/javascript" src="~/assets/js/jquery.easing.1.3.js"></script>
+
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="~/assets/js/bootstrap.min.js"></script>
+
+    <!-- Mobile Menu -->
+    <script type="text/javascript" src="~/assets/js/mmenu.min.js"></script>
+
+    <!-- Harvey - State manager for media queries -->
+    <script type="text/javascript" src="~/assets/js/harvey.min.js"></script>
+
+    <!-- Waypoints - Load Elements on View -->
+    <script type="text/javascript" src="~/assets/js/waypoints.min.js"></script>
+
+    <!-- Facts Counter -->
+    <script type="text/javascript" src="~/assets/js/facts.counter.min.js"></script>
+
+    <!-- MixItUp - Category Filter -->
+    <script type="text/javascript" src="~/assets/js/mixitup.min.js"></script>
+
+    <!-- Owl Carousel -->
+    <script type="text/javascript" src="~/assets/js/owl.carousel.min.js"></script>
+
+    <!-- Accordion -->
+    <script type="text/javascript" src="~/assets/js/accordion.min.js"></script>
+
+    <!-- Responsive Tabs -->
+    <script type="text/javascript" src="~/assets/js/responsive.tabs.min.js"></script>
+
+    <!-- Responsive Table -->
+    <script type="text/javascript" src="~/assets/js/responsive.table.min.js"></script>
+
+    <!-- Masonry -->
+    <script type="text/javascript" src="~/assets/js/masonry.min.js"></script>
+
+    <!-- Carousel Swipe -->
+    <script type="text/javascript" src="~/assets/js/carousel.swipe.min.js"></script>
+
+    <!-- bxSlider -->
+    <script type="text/javascript" src="~/assets/js/bxslider.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="~/assets/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+
+</html>

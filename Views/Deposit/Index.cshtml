@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Nạp tiền đổi điểm";
+}
+
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Nạp tiền vào tài khoản</h2>
+            <span class="underline center"></span>
+            <p class="lead">Đánh giá và gửi phản hồi ở trang này cho chúng tôi</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li>Liên hệ</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; margin-top: 32px;">
+            <!-- Cột nạp tiền -->
+            <section style="flex: 1 1 340px; max-width: 420px; background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); padding: 32px 28px; min-width: 300px;">
+                <h2 style="font-weight:700; color:#2b6cb0; margin-bottom: 18px;">Nạp tiền vào tài khoản</h2>
+                <form method="post" asp-action="CreatePaymentUrl" asp-controller="Payment">
+                    <div class="form-group" style="margin-bottom: 18px;">
+                        <label for="Amount">Số tiền muốn nạp (VNĐ):</label>
+                        <input type="number" class="form-control" id="Amount" name="Amount" min="10000" step="1000" required style="margin-top: 6px;" />
+                    </div>
+                    <input type="hidden" name="FullName" value="@User.Identity.Name" />
+                    <input type="hidden" name="OrderInfo" value="Nạp tiền đổi điểm" />
+                    <input type="hidden" name="DoccumentID" value="0" />
+                    <div style="margin-bottom: 16px;">
+                        <button type="submit" class="btn btn-success mt-2" style="width: 100%; font-size: 1.1em;">Thanh toán với MoMo</button>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary mt-2" style="width: 100%; font-size: 1.1em; background: #1890ff; border: none;">Thanh toán với VnPay</button>
+                    </div>
+                </form>
+            </section>
+            <!-- Cột bảng quy đổi điểm -->
+            <aside style="flex: 1 1 320px; max-width: 380px; background: #f8fafc; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 32px 24px; min-width: 260px;">
+                <h3 style="font-weight:600; color:#1a202c; margin-bottom: 18px;">Bảng quy đổi điểm</h3>
+                <table id="exchange-table" style="width:100%; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 6px rgba(0,0,0,0.03); cursor:pointer;">
+                    <thead style="background:#e6f7ff;">
+                        <tr>
+                            <th style="padding:10px 8px; text-align:left;">Số tiền nạp (VNĐ)</th>
+                            <th style="padding:10px 8px; text-align:left;">Số điểm nhận</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-amount="10000"><td style="padding:8px 8px;">10.000</td><td style="padding:8px 8px;">10 điểm</td></tr>
+                        <tr data-amount="50000"><td style="padding:8px 8px;">50.000</td><td style="padding:8px 8px;">50 điểm</td></tr>
+                        <tr data-amount="100000"><td style="padding:8px 8px;">100.000</td><td style="padding:8px 8px;">100 điểm</td></tr>
+                        <tr data-amount="500000"><td style="padding:8px 8px;">500.000</td><td style="padding:8px 8px;">500 điểm</td></tr>
+                        <tr data-amount="1000000"><td style="padding:8px 8px;">1.000.000</td><td style="padding:8px 8px;">1.000 điểm</td></tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 18px; color:#374151; font-size:0.98em;">
+                    <b>Lưu ý:</b> Số điểm nhận được sẽ tương ứng với số tiền bạn nạp vào (1.000 VNĐ = 1 điểm). Điểm dùng để mua tài liệu, sử dụng các dịch vụ khác trên hệ thống.
+                </div>
+            </aside>
+        </main>
+    </div>
+    </div>
+
+<h2>Nạp tiền vào tài khoản</h2>
+

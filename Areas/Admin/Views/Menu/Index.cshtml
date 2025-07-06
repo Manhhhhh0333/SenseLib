@@ -1,0 +1,105 @@
+﻿@using DOAN.Models;
+@model IList<tblMenu>
+
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+	<div class="container-fluid">
+		<div class="pagetitle">
+			<h2>Danh Sách liên kết</h2>
+		</div>
+
+		<p>
+			<a type="button" class="btn btn-success" asp-area="Admin" asp-controller="Menu" asp-action="Create">
+				<i class="bi bi-file-earmark-text me-1"></i>Thêm liên kết
+			</a>
+		</p>
+		<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Danh sách liên kết</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-responsive-md">
+                    <thead>
+                        <tr>
+                            <th style="width:50px;">
+                                <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                    <input type="checkbox" class="custom-control-input" id="checkAll">
+                                    <label class="custom-control-label" for="checkAll"></label>
+                                </div>
+                            </th>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Mức</th>
+                            <th>liên kết cha</th>
+                            <th>Thứ tự</th>
+                            <th>Ẩn/Hiện</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var count = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text center">
+                                    <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox_@item.MenuID">
+                                        <label class="custom-control-label" for="customCheckBox_@item.MenuID"></label>
+                                    </div>
+                                </td>
+                                <td class="text center"><strong>@count</strong></td>
+                                <td>
+                                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="text-primary">
+                                        @item.MenuName
+                                    </a>
+                                </td>
+                                <td>@item.Levels</td>
+                                <td>@item.ParentID</td>
+                                <td>@item.MenuOrder</td>
+                                <td>
+                                            <div class="d-flex align-items-center">
+                                                @if (@item.IsActive == true)
+                                                {
+                                                    <i class="fa fa-circle text-success mr-1">Hiển thị</i>
+                                                    
+                                                                            }
+                                                else
+                                                {
+                                                    <i class="fa fa-circle text-danger mr-1">Ẩn</i>
+                                                    
+                                                                            }
+                                            </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a asp-area="Admin" asp-controller="Menu" asp-action="Edit"
+                                           asp-route-id="@item.MenuID"
+                                           class="btn btn-primary shadow btn-xs sharp mr-1">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a asp-area="Admin" asp-controller="Menu" asp-action="Delete"
+                                           asp-route-id="@item.MenuID"
+                                           class="btn btn-danger shadow btn-xs sharp">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+	
+</div>

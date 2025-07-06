@@ -1,0 +1,44 @@
+﻿<div class="content-body">
+    <div class="container-fluid">
+
+        <div class="card">
+
+<h2>Thống kê điểm hệ thống</h2>
+<p>Tổng điểm trong hệ thống: @Model.TotalPointsInSystem</p>
+<p>Điểm đã nạp: @Model.TotalPointsEarned</p>
+<p>Điểm đã tiêu: @Model.TotalPointsSpent</p>
+
+<h3>Điểm theo người dùng</h3>
+<table class="table">
+    <thead><tr><th>Họ tên</th><th>Email</th><th>Điểm hiện tại</th><th>Điểm đã tiêu</th><th>Điểm nhận được</th></tr></thead>
+    <tbody>
+        @foreach (var u in Model.UserStats)
+        {
+            <tr>
+                <td>@u.FullName</td>
+                <td>@u.Email</td>
+                <td>@u.CurrentPoints</td>
+                <td>@u.TotalSpent</td>
+                <td>@u.TotalEarned</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Điểm theo tài liệu</h3>
+<table class="table">
+    <thead><tr><th>Tiêu đề</th><th>Lượt tải</th><th>Điểm đã mang về</th></tr></thead>
+    <tbody>
+        @foreach (var d in Model.DocumentStats)
+        {
+            <tr>
+                <td>@d.Title</td>
+                <td>@d.TotalDownloads</td>
+                <td>@d.TotalPointsEarned</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+</div>

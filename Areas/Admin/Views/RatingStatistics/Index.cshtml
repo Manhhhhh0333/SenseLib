@@ -1,0 +1,59 @@
+﻿@model DOAN.ViewModels.RatingStatisticViewModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <h2 class="my-4 text-primary">Thống kê đánh giá người dùng</h2>
+
+        <ul>
+            <li><strong>Tổng số đánh giá:</strong> @Model.TotalRatings</li>
+        </ul>
+
+        <h4>Đánh giá theo tài liệu</h4>
+        <table class="table table-bordered  text-center table-striped">
+            <thead>
+                <tr>
+                    <th>Tài liệu</th>
+                    <th>Trung bình sao</th>
+                    <th>Số lượt đánh giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.RatingsByDocument)
+                {
+                    <tr>
+                        <td>@item.DocumentTitle</td>
+                        <td>@item.AverageRating</td>
+                        <td>@item.RatingCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h4>Đánh giá gần đây</h4>
+        <table class="table table-bordered text-center table-striped">
+            <thead>
+                <tr>
+                    <th>Người dùng</th>
+                    <th>Tài liệu</th>
+                    <th>Số sao</th>
+                    <th>Thời gian</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rating in Model.RecentRatings)
+                {
+                    <tr>
+                        <td>@rating.UserName</td>
+                        <td>@rating.DocumentTitle</td>
+                        <td>@rating.RatingValue</td>
+                        <td>@rating.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model DOAN.ViewModels.FavoriteStatisticViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+    <h2 class="text-primary">Thống kê tài liệu được yêu thích</h2>
+    <p><strong>Tổng lượt đánh dấu yêu thích:</strong> @Model.TotalFavorites</p>
+
+        <table class="table table-bordered text-center table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Tài liệu</th>
+                <th>Lượt yêu thích</th>
+                <th>Người dùng đã yêu thích</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var doc in Model.TopFavoritedDocuments)
+            {
+                <tr>
+                    <td>@doc.DocumentTitle</td>
+                    <td>@doc.FavoriteCount</td>
+                    <td>
+                        <ul>
+                            @foreach (var email in doc.UserEmails)
+                            {
+                                <li>@email</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>

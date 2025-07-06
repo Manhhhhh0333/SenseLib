@@ -1,0 +1,207 @@
+﻿@model IEnumerable<DOAN.ViewModel.DocumentViewModel>
+@using DOAN.Models;
+@using DOAN.Utilities;
+@{
+    var keyword = Context.Request.Query["keyword"].ToString();
+    var category = Context.Request.Query["category"].ToString();
+}
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Danh sách các tài liệu</h2>
+            <span class="underline center"></span>
+            <p class="lead">Hãy tận hưởng những tài liệu hay trên trang của chúng tôi</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li>Tài liệu & sách</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+<!-- Start: Products Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="books-media-gird">
+                <div class="container">
+                    <div class="row">
+                        <!-- Start: Search Section -->
+                        <section class="search-filters">
+                            <div class="container">
+                                <div class="filter-box">
+                                    <h3 style="font-family: 'Times New Roman', Times, serif;">Chúc bạn có một trải nghiệm tốt</h3>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- End: Search Section -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 col-md-push-3">
+                            <div class="filter-options margin-list">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4">
+                                        <select name="sortBy" class="form-select" onchange="this.form.submit()">
+                                            <option value="default" selected="@("default" == ViewBag.SortBy)">Mới nhất</option>
+                                            <option value="downloads" selected="@("downloads" == ViewBag.SortBy)">Lượt tải nhiều</option>
+                                            <option value="rating" selected="@("rating" == ViewBag.SortBy)">Đánh giá cao</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 pull-right">
+                                        <form method="get" asp-controller="ListDocument" asp-action="Index">
+                                            <input type="text" name="keyword" id="keywordInput" value="@ViewBag.Keyword" placeholder="Tìm kiếm tài liệu..." />
+                                            <button type="submit">Tìm kiếm</button>
+                                        </form>
+
+                                        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+                                        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+                                        <script>
+                                            $(function () {
+                                                $("#keywordInput").autocomplete({
+                                                    source: function (request, response) {
+                                                        $.ajax({
+                                                            url: '/ListDocument/SuggestTitles',
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            data: { term: request.term },
+                                                            success: function (data) {
+                                                                response(data);
+                                                            }
+                                                        });
+                                                    },
+                                                    minLength: 1
+                                                });
+                                            });
+                                        </script>
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="books-gird">
+                                @if (!Model.Any())
+                                {
+                                    <p class="text-danger">Không tìm thấy tài liệu nào phù hợp.</p>
+                                }
+                                else
+                                {
+                                    <ul>
+                                        @foreach (var item in Model)
+                                        {
+                                            string url = Functions.TitleSlugGeneration("document", item.Title ?? "no-title", item.DocumentID);
+                                            <li>
+                                                <figure>
+                                                    <img src="@Url.Content(item.Image ?? "~/images/books-media/gird-view/book-media-grid-01.jpg")" alt="Book">
+                                                    <figcaption>
+                                                        <p><strong>@item.Title</strong></p>
+                                                        <p><strong>Tác giả:</strong> @item.AuthorName</p>
+                                                    </figcaption>
+                                                </figure>
+                                                <div class="book-list-icon blue-icon"></div>
+                                                <div class="single-book-box">
+                                                    <div class="post-detail">
+                                                        <div class="books-social-sharing">
+                                                            <ul>
+                                                                <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                                <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                                <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                                                <li><a href="#" target="_blank"><i class="fa fa-rss"></i></a></li>
+                                                                <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <header class="entry-header">
+                                                            <h3 class="entry-title">
+                                                                <a href="/@url">@item.Title</a>
+                                                            </h3>
+                                                            <ul>
+
+                                                                <li><strong>Tác giả:</strong> @item.AuthorName</li>
+                                                                <li><strong>File Type:</strong> @item.FileType</li>
+                                                                <li style="color: red"><strong>Điểm:</strong> @item.DocumentPoint</li>
+                                                                @if (item.AverageStar.HasValue)
+                                                                {
+                                                                    <li>
+                                                                        <div class="mt-1">
+                                                                            <h5 class="text-info">
+                                                                                Đánh giá: @Math.Round(item.AverageStar.Value, 1)/5<i class="fa fa-star-o text-muted star"
+                                                                                                                                     style="cursor:pointer;color:yellow; font-size: 18px;"></i>
+                                                                            </h5>
+                                                                        </div>
+                                                                    </li>
+
+                                                                }
+                                                            </ul>
+                                                        </header>
+                                                        <div class="entry-content">
+                                                            <p>@item.Description</p>
+                                                        </div>
+                                                        <footer class="entry-footer">
+                                                            <a class="btn btn-primary" href="/@url">Đọc thêm</a>
+                                                        </footer>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+
+                            </div>
+                            <nav class="navigation pagination text-center">
+                                <h2 class="screen-reader-text">Posts navigation</h2>
+                                @if (ViewBag.CurrentPage > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, keyword = ViewBag.Keyword })">Trước</a>
+                                        </li>
+                                    }
+
+                                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("Index", new { page = i, keyword = ViewBag.Keyword })">@i</a>
+                                        </li>
+                                    }
+
+                                    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, keyword = ViewBag.Keyword })">Tiếp</a>
+                                        </li>
+                                    }
+                             
+                            </nav>
+                        </div>
+                        <div class="col-md-3 col-md-pull-9">
+                            <aside id="secondary" class="sidebar widget-area" data-accordion-group>
+                               @await Component.InvokeAsync("RecentCategory")
+                               
+                                <div class="widget widget_recent_entries">
+                                     
+                               
+                                    <div class="clearfix"></div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </main>
+    </div>
+
+</div>
+<!-- End: Products Section -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">

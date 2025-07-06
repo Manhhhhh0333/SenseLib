@@ -1,0 +1,81 @@
+﻿@model DOAN.Models.tblDocuments
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Chỉnh sửa Tài Liệu</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="DocumentID" />
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label asp-for="CategoryID"></label>
+                            <select asp-for="CategoryID"
+                                    asp-items="ViewBag.mnList ?? new List<SelectListItem>()"
+                                    class="form-control">
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PublisherID"></label>
+                            <select asp-for="PublisherID" asp-items="@(new SelectList(ViewBag.pubList, "Value", "Text"))" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label asp-for="AuthorID"></label>
+                            <select asp-for="AuthorID" asp-items="@(new SelectList(ViewBag.authList, "Value", "Text"))" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FilePath">Tệp tài liệu</label>
+                        <input asp-for="FilePath" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Image">Hình ảnh</label>
+                        <input asp-for="Image" class="form-control" />
+                    </div>
+
+                    <input type="hidden" asp-for="UploadDate" />
+                    <input type="hidden" asp-for="Status" />
+                    <input type="hidden" asp-for="UploadedBy" />
+
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Cập nhật
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary ml-2">Quay lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section HeadContent {
+    @{
+        var summerNote = new DOAN.Areas.Admin.Models.SummerNote("#Description");
+        <partial name="_SummerNote" model="summerNote" />
+    }
+}

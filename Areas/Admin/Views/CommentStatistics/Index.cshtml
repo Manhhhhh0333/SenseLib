@@ -1,0 +1,43 @@
+﻿@model DOAN.ViewModels.CommentStatisticViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+        <h2>Thống kê bình luận</h2>
+
+        <ul>
+            <li><strong>Tổng số bình luận:</strong> @Model.TotalComments</li>
+        </ul>
+
+        <h4>Bình luận theo người dùng</h4>
+        <table class="table table-bordered">
+            <tr><th>Email</th><th>Số bình luận</th></tr>
+            @foreach (var item in Model.CommentsByUser)
+            {
+                <tr><td>@item.Email</td><td>@item.Count</td></tr>
+            }
+        </table>
+
+        <h4>20 Bình luận gần đây</h4>
+        <table class="table table-striped">
+            <tr>
+                <th>Email</th>
+                <th>Nội dung</th>
+                <th>Ngày tạo</th>
+                <th>Xoá</th>
+            </tr>
+            @foreach (var c in Model.RecentComments)
+            {
+                <tr>
+                    <td>@c.UserEmail</td>
+                    <td>@c.Content</td>
+                    <td>@c.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a href="@Url.Action("Delete", "CommentStatistics", new { area = "Admin", id = c.Id })" onclick="return confirm('Xoá bình luận này?')">Xoá</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        </div>
+</div>

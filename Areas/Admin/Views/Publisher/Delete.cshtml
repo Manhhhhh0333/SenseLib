@@ -1,0 +1,39 @@
+﻿@model DOAN.Models.tblPublishers
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Xóa Nhà Xuất Bản</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Delete" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="PublisherID" class="control-label">Mã nhà xuất bản</label>
+                            <input asp-for="PublisherID" class="form-control mb-3" disabled />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Name" class="control-label">Tên nhà xuất bản</label>
+                            <input asp-for="Name" class="form-control mb-3" disabled />
+                        </div>
+                        
+
+                    </div>
+                    <input type="hidden" asp-for="PublisherID" />
+                    <div class="form-group mt-3">
+                        <a class="btn btn-lg btn-warning p-2 mr-3" href="javascript:history.back()">
+                            <i class="bi bi-arrow-left-circle"></i> Quay Lại
+                        </a>
+                        <button type="submit" class="btn btn-lg btn-danger p-2">
+                            <i class="bi bi-trash-fill"></i> Xóa NXB
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

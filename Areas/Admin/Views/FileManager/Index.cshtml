@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wapper">
+    <div class="col-xl">
+        <div id="elfinder"></div>
+        @section HeadContent {
+            <script src="~/admin/lib/snote/jquery.min.js"></script>
+            <script src="~/admin/lib/snote/bootstrap.bundle.min.js"></script>
+            <link href="~/admin/assets/vendor/bootstrap.css rel="stylesheet" />
+            <script src="~/admin/lib/snote/summernote-bs4.min.js"></script>
+            <link rel="stylesheet" href="~/admin/lib/snote/summernote-bs4.css" />
+            <link href="~/admin/lib/jqueryui/themes/themes/base/theme.css" rel="stylesheet" />
+            <link href="~/admin/lib/jqueryui/themes/themes/base/jquery-ui.css" rel="stylesheet" />
+            <link href="~/admin/lib/elFinder/css/elfinder.full.css" rel="stylesheet" />
+            <link href="~/admin/lib/elFinder/css/theme.css" rel="stylesheet" />
+            <script src="~/admin/lib/jqueryui/jquery-ui.js"></script>
+            <script src="~/admin/lib/elFinder/js/elfinder.min.js"></script>
+
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    // Xác định các command không hỗ trợ
+                    var myCommands = elFinder.prototype._options.commands;
+
+                    var disabled = ['callback', 'chmod', 'editor', 'netmount', 'ping', 'search', 'zipdl', 'help'];
+                    elFinder.prototype.i18.en.messages.TextArea = "Edit";
+
+                    $.each(disabled, function (i, cmd) {
+                        var idx = $.inArray(cmd, myCommands);
+                        if (idx !== -1) {
+                            myCommands.splice(idx, 1);
+                        }
+                    });
+
+                    // Tùy chọn cấu hình elFinder
+                    var options = {
+                        baseUrl: '/Admin/lib/elFinder/',
+                        url: '/Admin/el-finder-file-system/connector', // Đường dẫn đến backend
+                        rememberLastDir: false,
+                        commands: myCommands,
+                        lang: 'vi',
+                        uiOptions: {
+                            toolbar: [
+                                ['back', 'forward'],
+                                ['reload'],
+                                ['home', 'up'],
+                                ['mkdir', 'mkfile', 'upload'],
+                                ['open', 'download'],
+                                ['undo', 'redo'],
+                                ['info'],
+                                ['quicklook'],
+                                ['copy', 'cut', 'paste'],
+                                ['rm'],
+                                ['duplicate', 'rename', 'edit'],
+                                ['selectall', 'selectnone', 'selectinvert'],
+                                ['view', 'sort']
+                            ]
+                        }
+                    };
+
+                    // Khởi tạo elFinder
+                    $('#elfinder').elfinder(options).elfinder('instance');
+                });
+            </script>
+        }
+    </div>
+</div>
+

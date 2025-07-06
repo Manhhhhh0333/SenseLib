@@ -1,0 +1,32 @@
+﻿@model DOAN.ViewModels.DownloadStatisticViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+   
+        <h2 class="text-primary">Thống kê lượt tải xuống tài liệu</h2>
+
+        <p><strong>Tổng lượt tải:</strong> @Model.TotalDownloads</p>
+
+        <table class="table table-bordered text-center table-striped">
+            <thead>
+                <tr>
+                    <th>Tài liệu</th>
+                    <th>Số lượt tải</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DownloadsByDocument)
+                {
+                    <tr>
+                        <td>@item.DocumentTitle</td>
+                        <td>@item.DownloadCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</div>

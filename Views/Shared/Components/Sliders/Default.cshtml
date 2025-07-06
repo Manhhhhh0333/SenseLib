@@ -1,0 +1,40 @@
+﻿@model IList<tblSliders>
+@using DOAN.Models
+
+<!-- Start: Slider Section -->
+<div data-ride="carousel" class="carousel slide" id="home-v1-header-carousel">
+
+    <!-- Carousel slides -->
+    <div class="carousel-inner">
+
+        @{
+            bool isFirst = true;
+        }
+
+        @foreach (var item in Model)
+        {
+            <div class="item @(isFirst ? "active" : "")">
+                <figure>
+                    <img alt="Home Slide" src="@item.ImagePath" />
+                </figure>
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Tìm hiểu thêm</h3>
+                        <p>@item.Caption</p>
+                        <div class="slide-buttons hidden-sm hidden-xs">
+                            <a href="@item.Link" class="btn btn-primary">Xem thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            isFirst = false;
+        }
+
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#home-v1-header-carousel" data-slide="prev"></a>
+    <a class="right carousel-control" href="#home-v1-header-carousel" data-slide="next"></a>
+</div>
+<!-- End: Slider Section -->
